@@ -1,0 +1,4 @@
+---
+influxdb:
+  git: https://github.com/influxdb/influxdb.git
+  src: src/github.com/influxdb/influxdb

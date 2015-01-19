@@ -1,0 +1,6 @@
+---
+- hosts: influxdb
+  user: vagrant
+  roles:
+    - golang
+    - influxdb

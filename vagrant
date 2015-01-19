@@ -1,0 +1,8 @@
+[nodes]
+node1
+
+[tsdb:children]
+nodes
+
+[development:children]
+nodes

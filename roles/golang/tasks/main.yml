@@ -1,0 +1,34 @@
+---
+- name: Dependencies
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - libselinux-python
+    - mercurial
+
+- name: Bin Dir
+  file: path=bin state=directory
+
+- name: GOPATH
+  file: path=go state=directory
+
+- name: Get Golang Package
+  get_url: url={{ downloads }}/{{ package }} dest=./
+
+- name: Unarchive Golang Package
+  command: tar -xzvf ../{{ package }} chdir=./bin
+
+- name: Add GOPATH
+  lineinfile: dest=.bash_profile line=GOPATH=$HOME/go
+
+- name: Export GOPATH
+  lineinfile: dest=.bash_profile line="export GOPATH"
+
+- name: Add go/bin to path
+  lineinfile: dest=.bash_profile line=PATH=$HOME/bin/go/bin:$PATH
+
+- name: Add GOROOT
+  lineinfile: dest=.bash_profile line=GOROOT=$HOME/bin/go/
+
+- name: Export GOROOT
+  lineinfile: dest=.bash_profile line="export GOROOT"
